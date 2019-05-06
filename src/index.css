@@ -7,7 +7,7 @@ ol, ul {
   padding-left: 30px;
 }
 
-.board-row:after {
+.grid-row:after {
   clear: both;
   content: "";
   display: table;
@@ -17,7 +17,7 @@ ol, ul {
   margin-bottom: 10px;
 }
 
-.square {
+.circle {
   background: #fff;
   border: 1px solid #999;
   float: left;
@@ -32,11 +32,11 @@ ol, ul {
   width: 34px;
 }
 
-.square:focus {
+.circle:focus {
   outline: none;
 }
 
-.kbd-navigation .square:focus {
+.kbd-navigation .circle:focus {
   background: #ddd;
 }
 
