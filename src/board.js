@@ -17,6 +17,7 @@ class Board extends React.Component {
           {this.renderCircle(0)}
           {this.renderCircle(1)}
           {this.renderCircle(2)}
+
           {this.renderCircle(3)}
           {this.renderCircle(4)}
           {this.renderCircle(5)}
@@ -71,12 +72,13 @@ class Board extends React.Component {
           {this.renderCircle(39)}
           {this.renderCircle(40)}
           {this.renderCircle(41)}
-         
+      
         </div>
       </div>
     );
   }
 }
+
 class Game extends React.Component {
   constructor(props) {
     super(props);
@@ -86,4 +88,5 @@ class Game extends React.Component {
       xIsNext: true
     };
   }
+
 export default Board;
