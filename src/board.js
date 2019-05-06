@@ -2,7 +2,7 @@ import React from 'react';
 import './index.css';
 import Circle from './circle.js';
 
-class Grid extends React.Component {
+class Board extends React.Component {
   renderCircle(i) {
     return <Circle />;
   }
@@ -13,7 +13,7 @@ class Grid extends React.Component {
     return (
       <div>
         <div className="status">{status}</div>
-        <div className="grid-row">
+        <div className="board-row">
           {this.renderCircle(0)}
           {this.renderCircle(1)}
           {this.renderCircle(2)}
@@ -23,7 +23,7 @@ class Grid extends React.Component {
           {this.renderCircle(6)}
        
         </div>
-        <div className="grid-row">
+        <div className="board-row">
           {this.renderCircle(7)}
           {this.renderCircle(8)}
           {this.renderCircle(9)}
@@ -33,7 +33,7 @@ class Grid extends React.Component {
           {this.renderCircle(13)}
     
         </div>
-        <div className="grid-row">
+        <div className="board-row">
           {this.renderCircle(14)}
           {this.renderCircle(15)}
           {this.renderCircle(16)}
@@ -43,7 +43,7 @@ class Grid extends React.Component {
           {this.renderCircle(20)}
    
         </div>
-        <div className="grid-row">
+        <div className="board-row">
           {this.renderCircle(21)}
           {this.renderCircle(22)}
           {this.renderCircle(23)}
@@ -53,7 +53,7 @@ class Grid extends React.Component {
           {this.renderCircle(27)}
   
         </div>
-        <div className="grid-row">
+        <div className="board-row">
           {this.renderCircle(28)}
           {this.renderCircle(29)}
           {this.renderCircle(30)}
@@ -63,7 +63,7 @@ class Grid extends React.Component {
           {this.renderCircle(34)}
      
         </div>
-          <div className="grid-row">
+          <div className="board-row">
           {this.renderCircle(35)}
           {this.renderCircle(36)}
           {this.renderCircle(37)}
@@ -86,4 +86,4 @@ class Game extends React.Component {
       xIsNext: true
     };
   }
-export default Grid;
+export default Board;
