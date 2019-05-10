@@ -3,6 +3,14 @@ import './index.css';
 import Circle from './circle.js';
 
 class Board extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+        squares: Array(42).fill(null),
+        xIsNext: true
+    };
+  }
+
   renderCircle(i) {
     return <Circle />;
   }
@@ -17,7 +25,6 @@ class Board extends React.Component {
           {this.renderCircle(0)}
           {this.renderCircle(1)}
           {this.renderCircle(2)}
-
           {this.renderCircle(3)}
           {this.renderCircle(4)}
           {this.renderCircle(5)}
@@ -78,15 +85,5 @@ class Board extends React.Component {
     );
   }
 }
-
-class Game extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-        squares: Array(42).fill(null)
- 
-      xIsNext: true
-    };
-  }
 
 export default Board;
