@@ -7,10 +7,18 @@ ol, ul {
   padding-left: 30px;
 }
 
-.board-row:after {
-  clear: both;
-  content: "";
-  display: table;
+.board {
+  display: flex;
+}
+
+.board-column {
+  display: flex;
+  flex-direction: column;
+  width: 34px;
+}
+
+.board-column:hover {
+  background: #ffa;
 }
 
 .status {
@@ -18,7 +26,7 @@ ol, ul {
 }
 
 .square {
-  background: #fff;
+  background: rgba(255,255,255,.5);
   border: 1px solid #999;
   float: left;
   font-size: 24px;
@@ -27,6 +35,8 @@ ol, ul {
   height: 34px;
   margin-right: -1px;
   margin-top: -1px;
+  /* margin-left: -1px;
+  margin-bottom: -1px; */
   padding: 0;
   text-align: center;
   width: 34px;
