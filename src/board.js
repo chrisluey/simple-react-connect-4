@@ -1,7 +1,6 @@
 import React from "react";
 import "./index.css";
 import Square from "./square.js";
-import { restElement } from "@babel/types";
 
 class Board extends React.Component {
   constructor(props) {
@@ -80,11 +79,10 @@ class Board extends React.Component {
     );
   }
   resetButton = () => {
-    this.state = {
+    this.setState({
       squares: Array(42).fill(null),
       p1IsNext: true
-    };
-    this.render();
+    });
   };
 }
 
