@@ -1,9 +1,10 @@
 body {
-  font: 14px "Century Gothic", Futura, sans-serif;
-  margin: 20px;
+  font: 24px "Century Gothic", Futura, sans-serif;
+  margin: 30px;
 }
 
-ol, ul {
+ol,
+ul {
   padding-left: 30px;
 }
 
@@ -18,7 +19,7 @@ ol, ul {
 }
 
 .board-column:hover {
-  background: #ffa;
+  background: rgb(170, 255, 191);
 }
 
 .status {
@@ -26,7 +27,7 @@ ol, ul {
 }
 
 .square {
-  background: rgba(255,255,255,.5);
+  background: rgba(255, 255, 255, 0.5);
   border: 1px solid #999;
   float: left;
   font-size: 24px;
