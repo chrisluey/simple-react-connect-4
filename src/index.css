@@ -13,7 +13,7 @@ ol, ul {
 
 .board-column {
   display: flex;
-  flex-direction: column;
+  flex-direction: column-reverse;
   width: 34px;
 }
 
