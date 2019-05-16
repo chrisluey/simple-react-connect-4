@@ -12,7 +12,7 @@ class Board extends React.Component {
   }
 
   renderSquare(i) {
-    return <Square />;
+    return <Square number={i}/>;
   }
 
   render() {
@@ -23,7 +23,7 @@ class Board extends React.Component {
         <div className="status">{status}</div>
         <div className="board">
 
-        <div className="board-column">
+        <div className="board-column" onClick={function() { alert('column was clicked');}}>
           {this.renderSquare(0)}
           {this.renderSquare(1)}
           {this.renderSquare(2)}
@@ -32,7 +32,7 @@ class Board extends React.Component {
           {this.renderSquare(5)}
 
         </div>
-        <div className="board-column">
+        <div className="board-column" onClick={function() { alert('column was clicked');}}>
           {this.renderSquare(6)}
           {this.renderSquare(7)}
           {this.renderSquare(8)}
@@ -41,7 +41,7 @@ class Board extends React.Component {
           {this.renderSquare(11)}
 
         </div>
-        <div className="board-column">
+        <div className="board-column" onClick={function() { alert('column was clicked');}}>
           {this.renderSquare(12)}
           {this.renderSquare(13)}
           {this.renderSquare(14)}
@@ -50,7 +50,7 @@ class Board extends React.Component {
           {this.renderSquare(17)}
 
         </div>
-        <div className="board-column">
+        <div className="board-column" onClick={function() { alert('column was clicked');}}>
           {this.renderSquare(18)}
           {this.renderSquare(19)}
           {this.renderSquare(20)}
@@ -59,7 +59,7 @@ class Board extends React.Component {
           {this.renderSquare(23)}
 
         </div>
-        <div className="board-column">
+        <div className="board-column" onClick={function() { alert('column was clicked');}}>
           {this.renderSquare(24)}
           {this.renderSquare(25)}
           {this.renderSquare(26)}
@@ -68,7 +68,7 @@ class Board extends React.Component {
           {this.renderSquare(29)}
 
         </div>
-          <div className="board-column">
+          <div className="board-column" onClick={function() { alert('column was clicked');}}>
           {this.renderSquare(30)}
           {this.renderSquare(31)}
           {this.renderSquare(32)}
@@ -78,7 +78,7 @@ class Board extends React.Component {
 
         </div>
 
-        <div className="board-column">
+        <div className="board-column" onClick={function() { alert('column was clicked');}}>
           {this.renderSquare(36)}
           {this.renderSquare(37)}
           {this.renderSquare(38)}
