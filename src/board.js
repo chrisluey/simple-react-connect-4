@@ -38,11 +38,10 @@ class Board extends React.Component {
   }
 
   findLowestSquare(i) {
-    const squares = this.state.squares.slice();
     let x = i * 6;
     let result = -1;
     for (let j = x; j < x + 6; j++) {
-      if (!squares[j]) {
+      if (!this.state.squares[j]) {
         result = j;
         return result;
       }
