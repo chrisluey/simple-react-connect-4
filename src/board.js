@@ -13,6 +13,19 @@ class Board extends React.Component {
 
   calculateWinner() {
     let x = 0;
+
+  }
+
+  horizontalWinner() {
+
+  }
+
+  verticalWinner() {
+
+  }
+
+  diagonalWinner() {
+
   }
 
   renderSquare(i) {
@@ -42,15 +55,15 @@ class Board extends React.Component {
     let n = this.findLowestSquare(i);
     if (n !== -1) {
       squares[n] = this.state.p1IsNext ? 'P1' : 'P2';
+      this.setState({
+        squares: squares,
+        p1IsNext: !this.state.p1IsNext,
+      });
     }
     else
     {
       alert('Column is full');
     }
-    this.setState({
-      squares: squares,
-      p1IsNext: !this.state.p1IsNext,
-    });
   }
 
   renderColumn(i) {
