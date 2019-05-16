@@ -11,6 +11,10 @@ class Board extends React.Component {
     };
   }
 
+  calculateWinner() {
+    let x = 0;
+  }
+
   renderSquare(i) {
       return (
       <Square
@@ -36,7 +40,7 @@ class Board extends React.Component {
   handleClick(i) {
     const squares = this.state.squares.slice();
     let n = this.findLowestSquare(i);
-    if (n != -1) {
+    if (n !== -1) {
       squares[n] = this.state.p1IsNext ? 'P1' : 'P2';
     }
     else
