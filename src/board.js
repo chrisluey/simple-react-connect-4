@@ -3,29 +3,51 @@ import './index.css';
 import Square from './square.js';
 
 class Board extends React.Component {
+
   constructor(props) {
     super(props);
+    this.height = 6;
+    this.width = 7;
     this.state = {
-        squares: Array(42).fill(null),
-        p1IsNext: true,
+        squares: Array(this.height*this.width).fill(null),
+        p1IsNext: true
     };
   }
 
   calculateWinner() {
-    let x = 0;
-
+    if(this.verticalWinner()) {
+      return 1;
+    }
   }
 
   horizontalWinner() {
-
+    let won = 1;
+    let x = 0;
+    return -1;
   }
 
   verticalWinner() {
-
+    let won = 1;
+    let col = 0;
+    while(col < this.width * this.height) {
+      for (let row = col; row < col + 2; row++) {
+        console.log(row);
+        let color = this.state.squares[row];
+        if(color !== null) {
+          if (this.state.squares[row] === color && this.state.squares[row + 1] === color && this.state.squares[row + 2] === color && this.state.squares[row + 3] === color) {
+            return won;
+          }
+        }
+      }
+      col += this.height;
+    }
+    return !won;
   }
 
   diagonalWinner() {
-
+    let x = 0;
+    let result = -1;
+    return -1;
   }
 
   renderSquare(i) {
@@ -38,9 +60,9 @@ class Board extends React.Component {
   }
 
   findLowestSquare(i) {
-    let x = i * 6;
+    let x = i * this.height;
     let result = -1;
-    for (let j = x; j < x + 6; j++) {
+    for (let j = x; j < x + this.height; j++) {
       if (!this.state.squares[j]) {
         result = j;
         return result;
@@ -66,7 +88,7 @@ class Board extends React.Component {
   }
 
   renderColumn(i) {
-    let x = i * 6;
+    let x = i * this.height;
     return (
       <div className="board-column" onClick={() => this.handleClick(i)}>
             {this.renderSquare(x)}
@@ -81,6 +103,11 @@ class Board extends React.Component {
 
   render() {
     let status = 'Next player: ' + (this.state.p1IsNext ? 'P1' : 'P2');
+
+    if(this.calculateWinner()) {
+      console.log(this.calculateWinner());
+      status = 'Winner!';
+    }
 
     return (
       <div>
