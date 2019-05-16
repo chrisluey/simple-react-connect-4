@@ -20,8 +20,31 @@ class Board extends React.Component {
     );
   }
 
+  findLowestSquare(i) {
+    const squares = this.state.squares.slice();
+    let x = i * 6;
+    let result = -1;
+    for (let j = x; j < x + 6; j++) {
+      if (!squares[j]) {
+        result = j;
+        return result;
+      }
+    }
+    return result;
+  }
+
   handleClick(i) {
+    const squares = this.state.squares.slice();
+    let n = this.findLowestSquare(i);
+    if (n != -1) {
+      squares[n] = this.state.p1IsNext ? 'P1' : 'P2';
+    }
+    else
+    {
+      alert('Column is full');
+    }
     this.setState({
+      squares: squares,
       p1IsNext: !this.state.p1IsNext,
     });
   }
