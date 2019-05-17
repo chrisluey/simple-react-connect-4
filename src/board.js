@@ -15,31 +15,51 @@ class Board extends React.Component {
   }
 
   calculateWinner() {
-    if(this.verticalWinner()) {
+    if(this.verticalWinner() || this.horizontalWinner()) {
       return 1;
     }
   }
 
   horizontalWinner() {
     let won = 1;
-    let x = 0;
-    return -1;
-  }
-
-  verticalWinner() {
-    let won = 1;
-    let col = 0;
-    while(col < this.width * this.height) {
-      for (let row = col; row < col + 2; row++) {
-        console.log(row);
-        let color = this.state.squares[row];
+    let slot = 0;
+    // Loop through all the slots
+    while(slot < this.width * this.height) {
+      // Loop through each row
+      for (let cur = slot; cur < slot + 3; cur++) {
+        // Retrieve the color of the current slot
+        let color = this.state.squares[cur];
         if(color !== null) {
-          if (this.state.squares[row] === color && this.state.squares[row + 1] === color && this.state.squares[row + 2] === color && this.state.squares[row + 3] === color) {
+          // Check winning condition
+          if (this.state.squares[cur] === color && this.state.squares[cur + this.height] === color && this.state.squares[cur + this.height * 2] && this.state.squares[cur + this.height * 3]) {
             return won;
           }
         }
       }
-      col += this.height;
+      // Move to the next row
+      slot += this.width;
+    }
+    return !won;
+  }
+
+  verticalWinner() {
+    let won = 1;
+    let slot = 0;
+    // Loop through all the slots
+    while(slot < this.width * this.height) {
+      // Loop through each column
+      for (let cur = slot; cur < slot + 2; cur++) {
+        // Retrieve the color of the current slot
+        let color = this.state.squares[cur];
+        if(color !== null) {
+          // Check winning condition
+          if (this.state.squares[cur] === color && this.state.squares[cur + 1] === color && this.state.squares[cur + 2] === color && this.state.squares[cur + 3] === color) {
+            return won;
+          }
+        }
+      }
+      // Move to the next column
+      slot += this.height;
     }
     return !won;
   }
