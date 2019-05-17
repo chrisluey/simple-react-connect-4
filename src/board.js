@@ -15,7 +15,7 @@ class Board extends React.Component {
   }
 
   calculateWinner() {
-    if(this.verticalWinner() || this.horizontalWinner()) {
+    if(this.verticalWinner() || this.horizontalWinner() || this.diagonalWinner()) {
       return 1;
     }
   }
@@ -25,7 +25,7 @@ class Board extends React.Component {
     let slot = 0;
     // Loop through all the slots
     while(slot < this.width * this.height) {
-      // Loop through each row
+      // Loop through each column of the row
       for (let cur = slot; cur < slot + 3; cur++) {
         // Retrieve the color of the current slot
         let color = this.state.squares[cur];
@@ -47,7 +47,7 @@ class Board extends React.Component {
     let slot = 0;
     // Loop through all the slots
     while(slot < this.width * this.height) {
-      // Loop through each column
+      // Loop through each row of the column
       for (let cur = slot; cur < slot + 2; cur++) {
         // Retrieve the color of the current slot
         let color = this.state.squares[cur];
@@ -65,9 +65,61 @@ class Board extends React.Component {
   }
 
   diagonalWinner() {
-    let x = 0;
-    let result = -1;
-    return -1;
+    let won = 1;
+    let slot = 0;
+    let col = 0;
+    let row = 0;
+    // Loop through all the slots
+    while(slot < this.width * this.height) {
+      // Loop through each row of the column
+      for (let cur = slot; cur < slot + this.height; cur++) {
+        row = cur;
+        // Retrieve the color of the current slots
+        let color = this.state.squares[cur];
+        if(color !== null) {
+          // Check winning conditions
+          // Right descending
+          if (this.rightDescending(color, row, col)) {
+            return won;
+          }
+          if (this.leftDescending(color, row, col)) {
+            return won;
+          }
+          if (this.rightAscending(color, row, col)) {
+            return won;
+          }
+          if (this.leftAscending(color, row, col)) {
+            return won;
+          }
+
+        }
+        // Move to the nxt column
+        slot += this.height;
+        col++;
+      }
+    }
+  }
+
+  rightDescending(color, row, col) {
+    if(row + 3 < this.height && col + 3 < this.width) {
+    }
+    return 0;
+  }
+
+  leftDescending(color, row, col) {
+    if(row + 3 >= 0 && col + 3 < this.width) {
+    }
+    return 0;
+  }
+  rightAscending(color, row, col) {
+    if(row + 3 < this.height && col + 3 < this.width) {
+    }
+    return 0;
+  }
+  leftAscending(color, row, col) {
+    if(row + 3 < this.height && col + 3 < this.width) {
+    }
+    return 0;
   }
 
   renderSquare(i) {
