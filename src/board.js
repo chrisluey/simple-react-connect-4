@@ -15,7 +15,7 @@ class Board extends React.Component {
   }
 
   calculateWinner() {
-    if(this.verticalWinner() || this.horizontalWinner() || this.diagonalWinner()) {
+    if(this.verticalWinner() || this.horizontalWinner()) {
       return 1;
     }
   }
@@ -93,33 +93,47 @@ class Board extends React.Component {
           }
 
         }
-        // Move to the nxt column
-        slot += this.height;
-        col++;
+
       }
+
+      // Move to the next column
+      col++;
+      slot += this.height;
+
     }
   }
 
   rightDescending(color, row, col) {
-    if(row + 3 < this.height && col + 3 < this.width) {
-    }
-    return 0;
+    // if(row + 3 < this.height && col + 3 < this.width) {
+    //   console.log("Hey");
+    //   if(this.state.squares[row] === color &&
+    //     this.state.squares[row + 1 + this.height] === color &&
+    //     this.state.squares[row + 2 + this.height*2] === color &&
+    //     this.state.squares[row + 3 + this.height*3] === color) {
+    //     console.log(row);
+    //     console.log(row + 1 + this.height);
+    //     console.log(row + 2 + this.height*2);
+    //     console.log(row + 3 + this.height*3);
+    //     return 1;
+    //   }
+    // }
+    // return 0;
   }
 
   leftDescending(color, row, col) {
-    if(row + 3 >= 0 && col + 3 < this.width) {
-    }
-    return 0;
+    // if(row + 3 >= 0 && col + 3 < this.width) {
+    // }
+    // return 0;
   }
   rightAscending(color, row, col) {
-    if(row + 3 < this.height && col + 3 < this.width) {
-    }
-    return 0;
+    // if(row + 3 < this.height && col + 3 < this.width) {
+    // }
+    // return 0;
   }
   leftAscending(color, row, col) {
-    if(row + 3 < this.height && col + 3 < this.width) {
-    }
-    return 0;
+    // if(row + 3 < this.height && col + 3 < this.width) {
+    // }
+    // return 0;
   }
 
   renderSquare(i) {
