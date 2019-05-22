@@ -4,6 +4,10 @@ import Square from './square.js';
 
 class Board extends React.Component {
 
+  // constructor for the board component
+  // takes props from the game component
+  // no props needed so far
+  // initializes a 6 x 7 2-dimensional array of nulls to represent the board's values
   constructor(props) {
     super(props);
     this.height = 6;
@@ -18,6 +22,7 @@ class Board extends React.Component {
     };
   }
 
+  // this function looks at the board's values and determines if a player has won
   calculateWinner() {
     if(this.verticalWinner() || this.horizontalWinner()) {
       return 1;
@@ -140,6 +145,9 @@ class Board extends React.Component {
     // return 0;
   }
 
+  // int: col, column number in the board 
+  // int: row, row number in the board
+  // renders a square in the board, used as a helper function in renderColumn
   renderSquare(col, row) {
       return (
       <Square
@@ -150,6 +158,8 @@ class Board extends React.Component {
     );
   }
 
+  // int: col, column number for the board
+  // finds the lowest unoccupied square in a given column
   findLowestSquare(col) {
     let result = -1;
     for (let j = 0; j < this.height; j++) {
@@ -161,6 +171,10 @@ class Board extends React.Component {
     return result;
   }
 
+  // int: col, the column number in the board
+  // onclick function for each column in the board,
+  // places a circle with a value depending on the next player,
+  // will stop if winner is declared or the column is full
   handleClick(col) {
     const squares = this.state.squares.slice();
     let n = this.findLowestSquare(col);
@@ -177,6 +191,8 @@ class Board extends React.Component {
     }
   }
 
+  // int: col, the column number in the board
+  // renders a column in the board, called 7 times in the render function of the board
   renderColumn(col) {
     return (
       <div className="board-column" onClick={() => this.handleClick(col)}>
@@ -190,6 +206,7 @@ class Board extends React.Component {
     )
   }
 
+  // this function renders the board along with the buttons and information needed for the game
   render() {
     let status = 'Next player: ' + (this.state.p1IsNext ? 'P1' : 'P2');
 
