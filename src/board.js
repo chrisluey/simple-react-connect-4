@@ -150,10 +150,10 @@ class Board extends React.Component {
     );
   }
 
-  findLowestSquare(i) {
+  findLowestSquare(col) {
     let result = -1;
     for (let j = 0; j < this.height; j++) {
-      if (!this.state.squares[i][j]) {
+      if (!this.state.squares[col][j]) {
         result = j;
         return result;
       }
@@ -161,11 +161,11 @@ class Board extends React.Component {
     return result;
   }
 
-  handleClick(i) {
+  handleClick(col) {
     const squares = this.state.squares.slice();
-    let n = this.findLowestSquare(i);
+    let n = this.findLowestSquare(col);
     if (n !== -1) {
-      squares[i][n] = this.state.p1IsNext ? 'P1' : 'P2';
+      squares[col][n] = this.state.p1IsNext ? 'P1' : 'P2';
       this.setState({
         squares: squares,
         p1IsNext: !this.state.p1IsNext,
@@ -177,15 +177,15 @@ class Board extends React.Component {
     }
   }
 
-  renderColumn(i) {
+  renderColumn(col) {
     return (
-      <div className="board-column" onClick={() => this.handleClick(i)}>
-            {this.renderSquare(i, 0)}
-            {this.renderSquare(i, 1)}
-            {this.renderSquare(i, 2)}
-            {this.renderSquare(i, 3)}
-            {this.renderSquare(i, 4)}
-            {this.renderSquare(i, 5)}
+      <div className="board-column" onClick={() => this.handleClick(col)}>
+            {this.renderSquare(col, 0)}
+            {this.renderSquare(col, 1)}
+            {this.renderSquare(col, 2)}
+            {this.renderSquare(col, 3)}
+            {this.renderSquare(col, 4)}
+            {this.renderSquare(col, 5)}
       </div>
     )
   }
