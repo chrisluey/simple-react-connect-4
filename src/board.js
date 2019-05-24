@@ -229,9 +229,23 @@ class Board extends React.Component {
         {this.renderColumn(6)}
 
         </div>
+        <button className="resetbutton" onClick={() => this.resetButton()}>
+          {" "}
+          Reset{" "}
+        </button>
       </div>
     );
   }
+  resetButton = () => {
+    var squaresArray = Array(this.width);
+    for(var i = 0; i < this.width; i++) {
+      squaresArray[i] = Array(this.height).fill(null);
+    }
+    this.setState({
+      squares: squaresArray,
+      p1IsNext: true
+    });
+  };
 }
 
 export default Board;
