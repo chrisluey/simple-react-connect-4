@@ -209,6 +209,7 @@ class Board extends React.Component {
   // this function renders the board along with the buttons and information needed for the game
   render() {
     let status = 'Next player: ' + (this.state.p1IsNext ? 'P1' : 'P2');
+    let statusClass = this.state.p1IsNext ? "status1" : "status2";
 
     // if(this.calculateWinner()) {
     //   console.log(this.calculateWinner());
@@ -217,7 +218,7 @@ class Board extends React.Component {
 
     return (
       <div>
-        <div className="status">{status}</div>
+        <div className={statusClass}>{status}</div>
         <div className="board">
 
         {this.renderColumn(0)}
