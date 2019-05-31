@@ -18,134 +18,103 @@ class Board extends React.Component {
     }
     this.state = {
         squares: squaresArray,
-        p1IsNext: true
+        p1IsNext: true,
+        gameWon: false
     };
   }
 
   // this function looks at the board's values and determines if a player has won
   calculateWinner() {
-    if(this.verticalWinner() || this.horizontalWinner()) {
-      return 1;
+    let won = 1;
+    if(this.horizontalWinner() || this.verticalWinner() || this.diagonalWinner()) {
+      this.setState({
+        gameWon: true
+      });
+      return won;
     }
+    return !won;
   }
 
+  // Checks for 4 consecutive same-colored discs in a row
   horizontalWinner() {
     let won = 1;
-    let slot = 0;
-    // Loop through all the slots
-    while(slot < this.width * this.height) {
-      // Loop through each column of the row
-      for (let cur = slot; cur < slot + 3; cur++) {
-        // Retrieve the color of the current slot
-        let color = this.state.squares[cur];
-        if(color !== null) {
-          // Check winning condition
-          if (this.state.squares[cur] === color && this.state.squares[cur + this.height] === color && this.state.squares[cur + this.height * 2] && this.state.squares[cur + this.height * 3]) {
+    for(let row = 0; row < this.height; row++) {
+      for(let col = 0; col < this.width - 3; col++) {
+        let disc = this.state.squares[col][row];
+        if(disc !== null) {
+          if(this.state.squares[col + 1][row] === disc
+            && this.state.squares[col + 2][row] === disc
+            && this.state.squares[col + 3][row] === disc) {
             return won;
           }
         }
       }
-      // Move to the next row
-      slot += this.width;
     }
     return !won;
   }
 
+  // Checks for 4 consecutive same-colored discs in a column
   verticalWinner() {
     let won = 1;
-    let slot = 0;
-    // Loop through all the slots
-    while(slot < this.width * this.height) {
-      // Loop through each row of the column
-      for (let cur = slot; cur < slot + 2; cur++) {
-        // Retrieve the color of the current slot
-        let color = this.state.squares[cur];
-        if(color !== null) {
-          // Check winning condition
-          if (this.state.squares[cur] === color && this.state.squares[cur + 1] === color && this.state.squares[cur + 2] === color && this.state.squares[cur + 3] === color) {
+    for(let row = 0; row < this.height - 3; row++) {
+      for(let col = 0; col < this.width; col++) {
+        let disc = this.state.squares[col][row];
+        if(disc !== null) {
+          if(this.state.squares[col][row + 1] === disc
+            && this.state.squares[col][row + 2] === disc
+            && this.state.squares[col][row + 3] === disc) {
             return won;
           }
         }
       }
-      // Move to the next column
-      slot += this.height;
     }
     return !won;
   }
 
+  // Checks for 4 consecutive same-colored discs in a diagonal
   diagonalWinner() {
     let won = 1;
-    let slot = 0;
-    let col = 0;
-    let row = 0;
-    // Loop through all the slots
-    while(slot < this.width * this.height) {
-      // Loop through each row of the column
-      for (let cur = slot; cur < slot + this.height; cur++) {
-        row = cur;
-        // Retrieve the color of the current slots
-        let color = this.state.squares[cur];
-        if(color !== null) {
-          // Check winning conditions
-          // Right descending
-          if (this.rightDescending(color, row, col)) {
-            return won;
-          }
-          if (this.leftDescending(color, row, col)) {
-            return won;
-          }
-          if (this.rightAscending(color, row, col)) {
-            return won;
-          }
-          if (this.leftAscending(color, row, col)) {
-            return won;
-          }
-
-        }
-
-      }
-
-      // Move to the next column
-      col++;
-      slot += this.height;
-
+    if(this.ascendingDiagonalWinner() || this.descendingDiagonalWinner()) {
+      return won;
     }
+    return !won;
   }
 
-  rightDescending(color, row, col) {
-    // if(row + 3 < this.height && col + 3 < this.width) {
-    //   console.log("Hey");
-    //   if(this.state.squares[row] === color &&
-    //     this.state.squares[row + 1 + this.height] === color &&
-    //     this.state.squares[row + 2 + this.height*2] === color &&
-    //     this.state.squares[row + 3 + this.height*3] === color) {
-    //     console.log(row);
-    //     console.log(row + 1 + this.height);
-    //     console.log(row + 2 + this.height*2);
-    //     console.log(row + 3 + this.height*3);
-    //     return 1;
-    //   }
-    // }
-    // return 0;
+  ascendingDiagonalWinner() {
+    let won = 1;
+    for(let row = 0; row < this.height - 3; row++) {
+      for(let col = 0; col < this.width - 3; col++) {
+        let disc = this.state.squares[col][row];
+        if(disc !== null) {
+          if(this.state.squares[col + 1][row + 1] === disc
+            && this.state.squares[col + 2][row + 2] === disc
+            && this.state.squares[col + 3][row + 3] === disc) {
+            return won;
+          }
+        }
+      }
+    }
+    return !won;
   }
 
-  leftDescending(color, row, col) {
-    // if(row + 3 >= 0 && col + 3 < this.width) {
-    // }
-    // return 0;
-  }
-  rightAscending(color, row, col) {
-    // if(row + 3 < this.height && col + 3 < this.width) {
-    // }
-    // return 0;
-  }
-  leftAscending(color, row, col) {
-    // if(row + 3 < this.height && col + 3 < this.width) {
-    // }
-    // return 0;
+  descendingDiagonalWinner() {
+    let won = 1;
+    for(let row = this.height - 1; row > 2; row--) {
+      for(let col = 0; col < this.width - 3; col++) {
+        let disc = this.state.squares[col][row];
+        if(disc !== null) {
+          if(this.state.squares[col + 1][row - 1] === disc
+            && this.state.squares[col + 2][row - 2] === disc
+            && this.state.squares[col + 3][row - 3] === disc) {
+            return won;
+          }
+        }
+      }
+    }
+    return !won;
   }
 
-  // int: col, column number in the board 
+  // int: col, column number in the board
   // int: row, row number in the board
   // renders a square in the board, used as a helper function in renderColumn
   renderSquare(col, row) {
@@ -176,18 +145,22 @@ class Board extends React.Component {
   // places a circle with a value depending on the next player,
   // will stop if winner is declared or the column is full
   handleClick(col) {
-    const squares = this.state.squares.slice();
-    let n = this.findLowestSquare(col);
-    if (n !== -1) {
-      squares[col][n] = this.state.p1IsNext ? 'P1' : 'P2';
-      this.setState({
-        squares: squares,
-        p1IsNext: !this.state.p1IsNext,
-      });
-    }
-    else
-    {
-      alert('Column is full');
+    if(!this.state.gameWon) {
+      const squares = this.state.squares.slice();
+      let n = this.findLowestSquare(col);
+      if (n !== -1) {
+        squares[col][n] = this.state.p1IsNext ? 'P1' : 'P2';
+        if(!this.calculateWinner()) {
+          this.setState({
+            squares: squares,
+            p1IsNext: !this.state.p1IsNext,
+          });
+        }
+      }
+      else
+      {
+        alert('Column is full');
+      }
     }
   }
 
@@ -208,13 +181,14 @@ class Board extends React.Component {
 
   // this function renders the board along with the buttons and information needed for the game
   render() {
-    let status = 'Next player: ' + (this.state.p1IsNext ? 'P1' : 'P2');
-    let statusClass = this.state.p1IsNext ? "status1" : "status2";
+    let status;
+    if(this.state.gameWon) {
+      status = (this.state.p1IsNext ? 'P1' : 'P2') + ' is the winner!';
+    } else {
+      status = 'Next player: ' + (this.state.p1IsNext ? 'P1' : 'P2');
 
-    // if(this.calculateWinner()) {
-    //   console.log(this.calculateWinner());
-    //   status = 'Winner!';
-    // }
+    }
+    let statusClass = this.state.p1IsNext ? "status1" : "status2";
 
     return (
       <div>
@@ -244,7 +218,8 @@ class Board extends React.Component {
     }
     this.setState({
       squares: squaresArray,
-      p1IsNext: true
+      p1IsNext: true,
+      gameWon: false
     });
   };
 }
