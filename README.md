@@ -1,4 +1,4 @@
-# cargo-throw-4
+# simple-react-connect-4
 Connect 4 game using React
 
 To run this game: go to your nodejs folder in a command line and run npx create-react-app my-app. After the folder is created, go to the src folder in that app and replace its contents with the src folder of this repo.
